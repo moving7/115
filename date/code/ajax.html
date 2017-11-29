@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>1</title>
+</head>
+<body>
+    <!-- 12 -->
+</body>
+<script src="../lib/jquery.min.js"></script>
+<script>
+    $.ajax({
+        url: 'http://115.work.com/get_data',
+        type: 'get',
+        jsonp: 'back',
+        dateType: 'jsonp',
+        success:function(msg){
+//              alert(3)
+            console.log(msg)
+        },
+        error:function(info){
+            alert('error')
+//              alert(info)
+            console.log(info)
+        }
+    })
+</script>
+</html>
