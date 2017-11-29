@@ -32,9 +32,8 @@ export default {
   name: 'hello',
   data() {
     return {
-      varble: [{title:'工作计划 （月报）',start: new Date(2017,10,1),end: new Date(2017,10,2)},{title:'工作计划',start: new Date(2017,10,5),end: new Date(2017,10,7)},{title:'fdsf',start: new Date(2017,10,1),end: new Date(2017,10,2)},{title: '下午去分公司开会',start: new Date(2017, 10, 16),url:'http://baidu.com'}],
-	  d_obj:[],
-//	  vara:1,
+      varble: [{title:'工作计划 （月报）',start: new Date(2017,10,1),end: new Date(2017,10,2)},{title:'工作计划',start: new Date(2017,10,5),end: new Date(2017,10,7)},{title:'fdsf',start: new Date(2017,10,1),end: new Date(2017,10,2)},{title: '下午去分公司开会',start: new Date(2017, 10, 16)}],
+	  d_obj: [],
     }
   },
   mounted() {
@@ -48,10 +47,9 @@ $(document).ready(
 		var d = date.getDate();
 		var m = date.getMonth();
 		var y = date.getFullYear();
-		var info = '';
 		var test = '';
-		console.log(this.varble)
-		test = {title:'工作计划 （月报）',start: new Date(2017,10,1),end: new Date(2017,10,2)};
+//		console.log(this.varble)
+//		test = {title:'工作计划 （月报）',start: new Date(2017,10,1),end: new Date(2017,10,2)};
 //		test2 = {title:'工作计划',start: new Date(2017,10,5),end: new Date(2017,10,8)};
 //		test3 = test,test2;
 //		test4 = [title=> '审核项目代码，准备上线',start=> new Date(2017, 10, 1),end=> new Date(2017,10,3),url=> 'http://yun.115.com'],[title=> '下午去分公司开会',start=> new Date(y, m, 16),url=> 'http://yun.115.com'];
@@ -66,31 +64,20 @@ $(document).ready(
 			dataType:'jsonp',
 			jsonp:'data_back',
 			success:function(msg){
-//				alert(msg)
-//				info = msg;
-//				alert(obj.a)
-				console.log(msg)
+//				obj.d_obj += '[';
 				$.each(msg,function(k,v){
 //					console.log(v)
-					obj.d_obj += "{title:'"+v.title+"',start: new Date("+v.start+")},";
+					obj.d_obj += '{title:"'+v.title+'",start: "2017-11-17",end: "2017-11-18"},';
+//					obj.d_obj += "{title:'"+v.title+"',start: "+ new Date(2017,10,1)+"},";
 				})
-				console.log(obj.d_obj)
+//				obj.d_obj += ']';
+				obj.d_obj = "{title:'买车票',start: '2017/11/7',end: '2017-11-15'},{title:'买车票',start: '2017/11/7',end: '2017-11-15'}";
+				console.log(obj.d_obj);
 			},
 			error:function(info){
 				alert('error')
 			}
 		})
-
-		
-		/*test = {
-					title: '审核项目代码，准备做最后的审核以及上线',
-					start: new Date(y, m, 1),
-					end: new Date(y,m,2),
-					url: 'http://yun.115.com'
-			};*/
-//		test = {title:'买车票',start:new Date(2017, 10, 3),end:new Date(2017,10,5)},{title:'买菜',start:new Date(2017, 10, 5)},
-		
-//		console.log(test)
 
 		
 	$("#calendar").fullCalendar(
@@ -109,44 +96,14 @@ $(document).ready(
 			editable : true,
 //			events: [test],
 //			events: obj.varble,
-			events: obj.d_obj,
+			events: [obj.d_obj],
+//			events: [{title:'买车票',start: '2017/11/7',end: '2017-11-15'}],
+//			events: [{title:'买车票',start: '2017/11/7',end: '2017-11-15'},],
+//			events: [{title:'"+v.title+"',start: '2017-11-1',end: '2017-11-3'},{title:'"+v.title+"',start: '2017-11-1',end: '2017-11-3'},],
+//			events: [{title:"买车票",start: "2017-11-17",end: "2017-11-18"},][{title:"买菜",start: "2017-11-17",end: "2017-11-18"},]
+//			events: [{title:"买车票",start: "2017-11-17",end: "2017-11-18"},{title:"买菜",start: "2017-11-17",end: '2017-11-18'},],
+//			events: [{title:'买车票',start: "2017/11/7",end: "2017-11-15"},{title:'买菜',start: new Date(2017,10,17),end:new Date(2017,10,18)}],
 //			events: [{title: '审核项目代码，准备上线',start: new Date(2017, 10, 1),end: new Date(2017,10,3),url: 'http://yun.115.com'},{title: '下午去分公司开会',start: new Date(y, m, 16)},],
-			/*events: [
-				{
-					title: '审核项目代码，准备上线',
-					start: new Date(2017, 10, 1),
-					end: new Date(2017,10,3),
-					url: 'http://yun.115.com'
-				},
-				{
-					title: '下午去分公司开会',
-					start: new Date(y, m, 16),
-//					end: new Date(y,m,7),
-					url: 'http://yun.115.com'
-
-				},
-				{
-					title: '测试数据',
-					start: new Date(y,m,5),
-					end: new Date(y,m,9)
-				},
-				{
-					title:'三碗不过刚',
-					start: new Date(y,m,18)
-//					end:new Date(y,m,18),
-				},
-				{
-					title:'工作计划 （月报）',
-					start: new Date(y,m+1,1),
-					end: new Date(y,m+1,2)
-
-				},
-				{
-					title:'等待审核',
-					start:new Date(y,m+1,3),
-					end: new Date(y,m+1,5)
-				}
-			],*/
 			dayClick : function(dayDate, allDay, jsEvent, view) { //点击单元格事件			
 				var d = $.fullCalendar.formatDate(dayDate,"dddd");
 				var m = $.fullCalendar.formatDate(dayDate,"yyyy年MM月dd日");
@@ -180,6 +137,7 @@ $(document).ready(
 
 		});
 	});
+	
 	/** 绑定事件到日期下拉框 **/
 	$(function(){
 		$("#fc-dateSelect").delegate("select","change",function(){
@@ -215,10 +173,8 @@ $(document).ready(
   
     date_add()
     {
-//  	alert(2)
 		location.href="http://localhost:8022/#/date_add"
     },
-
 
 }
  }

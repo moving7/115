@@ -38,4 +38,10 @@ class IndexController extends Controller
 //        print_r($res);
 
     }
+
+    /*提交表单数据测试*/
+    public function submit_do() {
+        $data = Input::get();
+        print_r($data);
+    }
 }

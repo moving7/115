@@ -22,3 +22,5 @@ route::get("/get_data",'IndexController@get_data');
 route::any("/get",'Data@index');
 
 route::get('/get_info','IndexController@get_info');
+
+route::any('/submit_do','IndexController@submit_do');
