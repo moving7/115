@@ -15,6 +15,18 @@
                                 <td>
                                     	<input class="Wdate" type="text" id="start_time" name="start_time" onClick="WdatePicker()"> &nbsp;&nbsp;&nbsp;&nbsp;<input style="display:" class="Wdate" name="end_time" type="text" id="end_time" onClick="WdatePicker()">
                                 </td>
+                            </tr>     
+                            <tr>
+                                <th width="120"><i class="require-red">*</i>提醒:</th>
+                                <td>
+                                    	<select name="" id="">
+                                    		<option value="0">-- 不提醒 --</option>
+                                    		<option value="0">提前15分钟</option>
+                                    		<option value="0">提前30分钟</option>
+                                    		<option value="0">提前1小时</option>
+                                    		<option value="0">提前2小时</option>
+                                    	</select>
+                                </td>
                             </tr>
 
 
@@ -22,6 +34,11 @@
                                 <th><i class="require-red">*</i>内容:</th>
                                 <td><textarea name="event_info" class="common-textarea" id="rt_content" cols="30" style="width: 98%;height:160px" rows="10" placeholder="请输入内容"></textarea></td>
                             </tr>
+                            <!--<tr>
+                                <th><i class="require-red">*</i>内容:</th>
+                                <td></td>
+                            </tr>-->
+                            
                             <tr>
                                 <th></th>
                                 <td>

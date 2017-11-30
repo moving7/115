@@ -32,52 +32,98 @@ export default {
   name: 'hello',
   data() {
     return {
-      varble: [{title:'工作计划 （月报）',start: new Date(2017,10,1),end: new Date(2017,10,2)},{title:'工作计划',start: new Date(2017,10,5),end: new Date(2017,10,7)},{title:'fdsf',start: new Date(2017,10,1),end: new Date(2017,10,2)},{title: '下午去分公司开会',start: new Date(2017, 10, 16)}],
-	  d_obj: [],
+      varble: [{"start": "2017-11-01","end": "2017-11-03","title": "月度总结",},],
+//{
+//  "start": "2017-11-06",
+//  "end": "2017-11-08",
+//  "title": "去分公司开研讨会",
+//},
+//{
+//  "start": "2017-11-28",
+//  "end": null,
+//  "title": "加入115团队",
+//},
+//{
+//  "start": "2017-11-20",
+//  "title": "测试数据",
+//},
+//{
+//  "start": "2017-11-15",
+//  "end": "2017-11-24",
+//  "title": "测试多天",
+//}
+//],
+	  d_obj: {title:'大型',start:'2017-12-5'},
     }
   },
-  mounted() {
+  create(){
   	obj = this
+  },
+  /*beforeCreate*/
+  mounted() {
+  	
+//	abc(this)
+//	obj = this
 //	alert(this.varble)
 //	console.log(this.varble)
 /** calendar配置 **/
-$(document).ready(
-	function() {
+//$(document).ready(
+	$(function(){
+//	function() {
 		var date = new Date();
 		var d = date.getDate();
 		var m = date.getMonth();
 		var y = date.getFullYear();
 		var test = '';
-//		console.log(this.varble)
-//		test = {title:'工作计划 （月报）',start: new Date(2017,10,1),end: new Date(2017,10,2)};
-//		test2 = {title:'工作计划',start: new Date(2017,10,5),end: new Date(2017,10,8)};
-//		test3 = test,test2;
-//		test4 = [title=> '审核项目代码，准备上线',start=> new Date(2017, 10, 1),end=> new Date(2017,10,3),url=> 'http://yun.115.com'],[title=> '下午去分公司开会',start=> new Date(y, m, 16),url=> 'http://yun.115.com'];
-//		console.log(test4)
-//		test = "{title:'工作计划 （月报）',start: new Date(y,10,1),end: new Date(y,10,2)},{title:'等待审核1',start:new Date(y,m+1,3),end: new Date(y,m+1,5)},{title:'核',start:new Date(y,m+1,17),end: new Date(y,m+1,19)}";
-//		var tn = new Date(y,m,d);	
-//		console.log(tn)
-//		alert('加载ing 请稍候')
-		$.ajax({
-			url:'http://115.work.com/get_data',
+//		console.log(obj.varble)
+
+	$.ajax({
+		
+			url:'http://115.work.com/get_info',
+//			url:'/json.php',
 			type:'get',
 			dataType:'jsonp',
 			jsonp:'data_back',
+//			async:false,
 			success:function(msg){
+//				console.log(msg)
+				obj.d_obj = msg;
+				console.log(obj.varble)
+//				test = msg;
+//				alert(obj.d_obj = JSON.stringify(msg))
+//				alert(JSON.parse(obj.d_obj))
+				
+//				obj.d_obj = JSON.stringify(msg)
+//				console.log(obj.d_obj)
+//				
+//				var events =[];
+//             $(msg).find('event').each(function() {
+//                 events.push({
+//                      title:$(this).attr('title'),
+//                      start:$(this).attr('start')
+//                  });
+//              });
+//             callback(events);
 //				obj.d_obj += '[';
-				$.each(msg,function(k,v){
+//				msg = eval("("+msg+")");
+//				obj.d_obj = msg
+//				console.log(msg)
+//				$.each(msg,function(k,v){
 //					console.log(v)
-					obj.d_obj += '{title:"'+v.title+'",start: "2017-11-17",end: "2017-11-18"},';
-//					obj.d_obj += "{title:'"+v.title+"',start: "+ new Date(2017,10,1)+"},";
-				})
+//					obj.d_obj += '{title:"'+v.title+'",start: "2017-11-17",end: "2017-11-18"},';
+//					obj.d_obj += "{title:'"+v.title+"',start: '2017-11-17'},";
+//				})
+//				console.log(msg)
 //				obj.d_obj += ']';
-				obj.d_obj = "{title:'买车票',start: '2017/11/7',end: '2017-11-15'},{title:'买车票',start: '2017/11/7',end: '2017-11-15'}";
-				console.log(obj.d_obj);
+//				obj.d_obj = '{title:"买车票",start: "2017/11/7",end: "2017-11-15"}';
+//				test = ''
+//				console.log(events);
 			},
 			error:function(info){
 				alert('error')
 			}
-		})
+	});
+		
 
 		
 	$("#calendar").fullCalendar(
@@ -94,15 +140,89 @@ $(document).ready(
 				nextYear: "<span class='fc-text-arrow'>下一年&raquo;</span>"
 			},
 			editable : true,
+//			events: "/data.php",
+//			events:[
+//			events.push({
+////                      title:$(this).attr('title'),
+////                      start:$(this).attr('start') // will be parsed
+//						title:'好丽友',
+//						start:'2017-11-5'
+//                 }),],
+////			events: function(start,end, callback) {
+//      $.ajax({
+//          url:'http://115.work.com/get_data',
+//          dataType: 'jsonp',
+////          async:false,
+//          jsonp:'data_back',
+//          data: {
+//              // ourhypothetical feed requires UNIX timestamps
+//              start:Math.round(start.getTime() / 1000),
+//              end: Math.round(end.getTime()/ 1000)
+//          },
+//          success:function(doc) {
+//              var events =[];
+//             $(doc).find('event').each(function() {
+//                 events.push({
+////                      title:$(this).attr('title'),
+////                      start:$(this).attr('start') // will be parsed
+//						title:'好丽友',
+//						start:'2017-11-5'
+//                  });
+//              });
+//             callback(events);
+//          }
+//      });
+// },
+//			events: function(){
+////				alert(obj)
+////				console.log(this.d_obj)
+//alert('5')
+//				alert(JSON.stringify(obj.d_obj))
+//			},
 //			events: [test],
 //			events: obj.varble,
-			events: [obj.d_obj],
-//			events: [{title:'买车票',start: '2017/11/7',end: '2017-11-15'}],
+//			events: eval(obj.d_obj),
+//			events: obj.d_obj,
+//			events: JSON.stringify(obj.d_obj),
+//			events: [{"title":"买车票","start":"2017,12,6"},{"title":"买菜","start":"2017,12,8"}],
+//			events: [{"title":"买车票","start":"2017,12,6"},{"title":"买菜","start":"2017,12,8"}],
+//			events: [test],
+//			events: ['title'=>'买车票','start'=>'2017-11-5'],
+//			events: [{title:'买车票',start: '2017/12/7',end: '2017-12-15'}],
 //			events: [{title:'买车票',start: '2017/11/7',end: '2017-11-15'},],
 //			events: [{title:'"+v.title+"',start: '2017-11-1',end: '2017-11-3'},{title:'"+v.title+"',start: '2017-11-1',end: '2017-11-3'},],
 //			events: [{title:"买车票",start: "2017-11-17",end: "2017-11-18"},][{title:"买菜",start: "2017-11-17",end: "2017-11-18"},]
-//			events: [{title:"买车票",start: "2017-11-17",end: "2017-11-18"},{title:"买菜",start: "2017-11-17",end: '2017-11-18'},],
-//			events: [{title:'买车票',start: "2017/11/7",end: "2017-11-15"},{title:'买菜',start: new Date(2017,10,17),end:new Date(2017,10,18)}],
+			/*events: [
+			{
+				title:"买车票",
+				start: "2017-11-17",
+				end: "2017-11-18"
+			},
+			{
+				title:"买菜",
+				start: "2017-11-17",
+				end: '2017-11-18'},],*/
+				events:[{"start": "2017-11-01","end": "2017-11-03","title": "月度总结",},
+{
+    "start": "2017-11-06",
+    "end": "2017-11-08",
+    "title": "去分公司开研讨会",
+},
+{
+    "start": "2017-11-28",
+    "end": null,
+    "title": "加入115团队",
+},
+{
+    "start": "2017-11-20",
+    "title": "测试数据",
+},
+{
+    "start": "2017-11-15",
+    "end": "2017-11-24",
+    "title": "测试多天",
+}],
+//			events: [{title:'买车票',start: '2017/11/7',end: '2017-11-15'},{title:'买菜',start: new Date(2017,10,17),end:new Date(2017,10,18)}],
 //			events: [{title: '审核项目代码，准备上线',start: new Date(2017, 10, 1),end: new Date(2017,10,3),url: 'http://yun.115.com'},{title: '下午去分公司开会',start: new Date(y, m, 16)},],
 			dayClick : function(dayDate, allDay, jsEvent, view) { //点击单元格事件			
 				var d = $.fullCalendar.formatDate(dayDate,"dddd");
@@ -168,6 +288,7 @@ $(document).ready(
 		
 	});
 
+
   },
   methods: {
   
@@ -178,6 +299,7 @@ $(document).ready(
 
 }
  }
+
 
 </script>
 

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Input;
 
 class IndexController extends Controller
 {
+//    header("Access-Control-Allow-Origin:*");
     public $e_put = ['code'=>404,'info'=>'Error'];
     public function index() {
         $data = ['code'=>200,'data'=>['name'=>'张三','age'=>35]];
@@ -23,7 +24,7 @@ class IndexController extends Controller
 //        if(!$back){
 //            echo json_encode($this->e_put);exit;
 //        }
-        $data = [['title'=>'买车票','start'=>'2017,10,6'],['title'=>'买菜','start'=>'2017,10,8']];
+        $data = [['title'=>'买车票','start'=>'2017,12,6'],['title'=>'买菜','start'=>'2017,12,8']];
         echo $back.'('.json_encode($data).')';
     }
 
@@ -33,7 +34,7 @@ class IndexController extends Controller
         if(!$back) {
             echo json_encode($this->e_put);exit;
         }
-        $res = DB::table('dateinfo')->get()->toarray();
+        $res = DB::table('dateinfo')->where('is_show',1)->get()->toarray();
         echo $back.'('.json_encode($res).')';
 //        print_r($res);
 
@@ -42,6 +43,24 @@ class IndexController extends Controller
     /*提交表单数据测试*/
     public function submit_do() {
         $data = Input::get();
-        print_r($data);
+        if($data['day_type'] != 3) {
+//            unset($data['end_time']);
+            $data['end_time'] = null;
+        }
+        unset($data['day_type']);
+        $data['event_info'] = $this->chars_do($data['event_info']);
+//        print_r($data);
+        $res = DB::table('dateinfo')->insert([
+            'start_time'=>$data['start_time'],
+            'end_time'=>$data['end_time'],
+            'event_info'=>$data['event_info'],
+            'add_time'=>time(),
+        ]);
+        var_dump($res);
+}
+
+    /*Html标签过滤*/
+    private function chars_do($param = '') {
+        return htmlspecialchars($param);
     }
 }
