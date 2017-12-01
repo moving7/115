@@ -22,7 +22,7 @@ class MailController extends Controller
 //            $m->from('xw_run@qq.com', '您还有未待办的事情');
             $m->to($user->email)->subject('待办提醒');
         });*/
-        $job = (new SendReminderEmail($user))->delay(10);
+        $job = (new SendReminderEmail($user))->delay(15);
         $this->dispatch($job);
     }
 }

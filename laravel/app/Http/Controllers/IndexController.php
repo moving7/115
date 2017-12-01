@@ -40,7 +40,7 @@ class IndexController extends Controller
 
     }
 
-    /*提交表单数据测试*/
+    /*提交表单数据*/
     public function submit_do() {
         $data = Input::get();
         if($data['day_type'] != 3) {
